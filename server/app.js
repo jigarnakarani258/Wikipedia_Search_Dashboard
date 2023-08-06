@@ -51,11 +51,12 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-app.get("/", (req, res) => {
-  res.send(
-    "<button><a href='/auth/google/callback'>Login With Google</a></button>"
-  );
-});
+//for backend-only
+// app.get("/", (req, res) => {
+//   res.send(
+//     "<button><a href='/auth/google/callback'>Login With Google</a></button>"
+//   );
+// });
 
 // Use the authentication routes
 app.use("/auth/", authRoute);
