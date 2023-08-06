@@ -7,6 +7,12 @@ const { User } = require("../models/user");
 // Protected search route
 searchRouter.get("/search", async (req, res) => {
   let { q: query, googleId } = req.query;
+  
+  if (!(req.query.q)) {
+    return res.status(400).send({
+      message: "Please write something for search query!!",
+    });
+  }
 
   let user = await User.findOne({ googleId: googleId });
   if (!user) {
