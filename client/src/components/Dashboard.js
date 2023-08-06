@@ -118,8 +118,16 @@ const Dashboard = () => {
 
         {/* Chart: Search Results Over the Last 7 Days */}
         <Grid item xs={12}>
+          <h3>Search Results Over the Past 7 Days</h3>
           <Charts past7daysdata={DataCountDayWised}/>
         </Grid>
+
+        {/* Chart: Search Results Over the past 1 Day- Hour wise */}
+        <Grid item xs={12}>
+          <h3> Search Results Over the past 1 Day- Hour wise </h3>
+          <Charts past1daysdata={DataCountHourWised}/>
+        </Grid>
+
       </Grid>
     </>
   );

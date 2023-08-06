@@ -21,10 +21,7 @@ ChartJS.register(
   Legend
 );
 
-const Charts = ({past7daysdata}) => {
-
-  console.log(past7daysdata);
-  
+const Charts = ({ past7daysdata, past1daysdata }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -38,33 +35,45 @@ const Charts = ({past7daysdata}) => {
     },
   };
 
-  const date = past7daysdata.map( el => el.date)
-  const dateWiseCount = past7daysdata.map( el => el.count)
-  
-  const labels = date;
-  // const labels = [
-  //   "Day 1",
-  //   "Day 2",
-  //   "Day 3",
-  //   "Day 4",
-  //   "Day 5",
-  //   "Day 6",
-  //   "Day 7",
-  // ];
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Search Results",
-        data: dateWiseCount,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-    ],
-  };
+  let labels, data;
+  if (past7daysdata) {
+    const date = past7daysdata.map((el) => el.date);
+    const dateWiseCount = past7daysdata.map((el) => el.count);
+
+    labels = date;
+    data = {
+      labels,
+      datasets: [
+        {
+          label: "Search Results",
+          data: dateWiseCount,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+        },
+      ],
+    };
+  } else {
+
+    const hour = past1daysdata.map((el) => el.hour);
+    const hourWiseCount = past1daysdata.map((el) => el.count);
+
+    labels = hour;
+    data = {
+      labels,
+      datasets: [
+        {
+          label: "Search Results",
+          data: hourWiseCount,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+        },
+      ],
+    };
+  }
+
   return (
     <div>
-      <h3>Search Results Over the Last 7 Days</h3>
+      
       <div style={{ height: "350px", position: "relative" }}>
         <Line options={options} data={data} />
       </div>
