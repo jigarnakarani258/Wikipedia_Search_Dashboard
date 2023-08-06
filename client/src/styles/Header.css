@@ -1,0 +1,23 @@
+.app-bar {
+  background-color: #84909a; 
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  flex-grow: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-button {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.active {
+  background-color: #1976d2; 
+}

@@ -1,0 +1,42 @@
+.dashboard-container {
+    padding: 20px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}
+
+
+.card-content {
+    text-align: center;
+}
+
+
+.dashboard-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dashboard-value {
+    font-size: 36px;
+}
+
+
+.charts-section {
+    margin-top: 20px;
+}
+
+.chart-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.chart-container {
+    margin-top: 20px;
+}
