@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "b30f1785-76cf-428d-bfb0-0bc9ef3666cb",
+		"name": "Wikipedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23434291"
+	},
+	"item": [
+		{
+			"name": "OAuth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/auth/google/callback",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"google",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get7DaysSeachHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/scorecards/7days/118329870989340233332",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"scorecards",
+						"7days",
+						"118329870989340233332"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userWiseSearchData-wikipedia-dashboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/wikipedia-dashboard/118329870989340233332",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"wikipedia-dashboard",
+						"118329870989340233332"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wikipedia-dashboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/wikipedia-dashboard/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"wikipedia-dashboard",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get1DaySeachHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/scorecards/1day/118329870989340233332",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"scorecards",
+						"1day",
+						"118329870989340233332"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get1HourSeachHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/scorecards/1hour/118329870989340233332",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"scorecards",
+						"1hour",
+						"118329870989340233332"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchWikipedia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\" : \"OAuth2.0 ?\",\r\n    \"googleId\" : \"nakaranijigs258@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
