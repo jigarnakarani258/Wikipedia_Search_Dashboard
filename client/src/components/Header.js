@@ -1,22 +1,32 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import "./../styles/Header.css"; 
 
 const Header = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const googleId = queryParams.get("googleId");
+
   return (
-    <AppBar position="static" color="primary">
-      <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+    <AppBar position="static" className="app-bar">
+      <Toolbar className="toolbar">
+        <Typography variant="h6" className="title">
           Wikipedia Search Dashboard
         </Typography>
-        <Button color="inherit" component={RouterLink} to="/">
+        <Button
+          color="inherit"
+          className={`nav-button ${location.pathname === "/" ? "active" : ""}`}
+          component={RouterLink}
+          to="/"
+        >
           Sign In
         </Button>
         <Button
           color="inherit"
+          className={`nav-button ${
+            location.pathname === "/dashboard" ? "active" : ""
+          }`}
           component={RouterLink}
           to={`/dashboard?googleId=${googleId}`}
         >
@@ -24,6 +34,9 @@ const Header = () => {
         </Button>
         <Button
           color="inherit"
+          className={`nav-button ${
+            location.pathname === "/search" ? "active" : ""
+          }`}
           component={RouterLink}
           to={`/search?googleId=${googleId}`}
         >

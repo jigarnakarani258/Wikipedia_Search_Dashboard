@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import "./../styles/Charts.css";
 
 ChartJS.register(
   CategoryScale,
@@ -53,7 +54,6 @@ const Charts = ({ past7daysdata, past1daysdata }) => {
       ],
     };
   } else {
-
     const hour = past1daysdata.map((el) => el.hour);
     const hourWiseCount = past1daysdata.map((el) => el.count);
 
@@ -73,9 +73,8 @@ const Charts = ({ past7daysdata, past1daysdata }) => {
 
   return (
     <div>
-      
-      <div style={{ height: "350px", position: "relative" }}>
-        <Line options={options} data={data} />
+      <div className="chart-container">
+        <Line className="line-chart" options={options} data={data} />
       </div>
     </div>
   );
