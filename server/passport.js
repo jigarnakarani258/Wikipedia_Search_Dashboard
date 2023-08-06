@@ -3,7 +3,7 @@ const passport = require("passport");
 const { User } = require("./models/user");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-// Replace these values with your actual Google OAuth credentials
+
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 

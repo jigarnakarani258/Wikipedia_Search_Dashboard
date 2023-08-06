@@ -10,7 +10,7 @@ const { globalErrController } = require("./controllers/errorController");
 
 const authRoute = require("./routes/auth");
 const userRouter = require("./routes/userRoutes");
-const searchRouter = require("./Routes/search");
+const searchRouter = require("./routes/search");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,26 +19,37 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
+app.set("trust proxy", 1);
+
 // Set up session middleware
 app.use(
   session({
-    secret: "your-secret-key",
-    resave: false,
-    saveUninitialized: false,
-    maxAge: 24 * 60 * 60 * 1000,
-  })
-);
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+    }
+  }))
+
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE,PATCH",
-    credentials: true,
-  })
-);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 app.get("/", (req, res) => {
   res.send(
@@ -62,7 +73,7 @@ app.all("*", (req, res, next) => {
   );
 });
 
-//Global error Middleware // Ex->{ next(err)}
+//Global error Middleware 
 app.use(globalErrController);
 
 module.exports = app;

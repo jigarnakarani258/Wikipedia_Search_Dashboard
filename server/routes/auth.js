@@ -22,12 +22,14 @@ router.get("/google/login/failed", (req, res) => {
 
 router.get("/google", passport.authenticate("google", ["profile", "email"]));
 
-router.get(
-  "/google/callback",
+router.get("/google/callback",
   passport.authenticate("google", {
-    successRedirect: `${process.env.CLIENT_URL}/api/wikipedia-dashboard`,
     failureRedirect: "login/failed",
-  })
+    session: true,
+  }),
+  function (req, res) {
+    res.redirect(`http://localhost:3000/dashboard?googleId=${req.user.googleId}`);
+  }
 );
 
 router.get("/logout", (req, res) => {

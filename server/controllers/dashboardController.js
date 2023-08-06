@@ -16,10 +16,9 @@ const wikipediaDashboard = catchAsync(async (req, res, next) => {
 
 //GetCurrentUser API , Authenticated with Passport JS
 const userWiseSearchData = catchAsync(async (req, res, next) => {
+  
   let user = req.params.googleId;
 
-  //from session
-  //let user = req.user.googleId;
   let searchDataList = await searchData.find(
     { googleId: user },
     { _id: 0, __v: 0 }
@@ -36,8 +35,6 @@ const userWiseSearchData = catchAsync(async (req, res, next) => {
 const get7DaysSeachHistory = catchAsync(async (req, res, next) => {
   let user = req.params.googleId;
 
-  //from session
-  //let user = req.user.googleId;
   const currentDate = moment().startOf("day");
   const sevenDaysAgo = moment(currentDate).subtract(7, "days");
 
@@ -59,8 +56,6 @@ const get7DaysSeachHistory = catchAsync(async (req, res, next) => {
 const get1DaySeachHistory = catchAsync(async (req, res, next) => {
   let user = req.params.googleId;
 
-  //from session
-  //let user = req.user.googleId;
   const currentDate = moment().startOf("day");
   const oneDaysAgo = moment(currentDate).subtract(1, "days");
 
@@ -82,8 +77,6 @@ const get1DaySeachHistory = catchAsync(async (req, res, next) => {
 const get1HourSeachHistory = catchAsync(async (req, res, next) => {
   let user = req.params.googleId;
 
-  //from session
-  //let user = req.user.googleId;
   const currentDate = moment();
   const oneHourAgo = moment(currentDate).subtract(1, "hours");
 
@@ -102,10 +95,94 @@ const get1HourSeachHistory = catchAsync(async (req, res, next) => {
   });
 });
 
+const Past7DaysDataCountDayWised = catchAsync(async (req, res, next) => {
+  let user = req.params.googleId;
+
+  const currentDate = moment().startOf("day");
+  const sevenDaysAgo = moment(currentDate).subtract(7, "days");
+
+  let searchDataList = await searchData.aggregate([
+    {
+      $match: {
+        googleId: user,
+        date: { $gte: sevenDaysAgo.toDate()}
+      },
+    },
+    {
+      $group: {
+        _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        date: "$_id",
+        count: 1,
+        _id: 0
+      }
+    },
+    {
+      $sort: {
+        date: 1
+      }
+    }
+  ]);
+
+  return res.status(200).send({
+    status: "success",
+    requestAt: req.requestTime,
+    data: searchDataList,
+  });
+});
+
+const Past1DayDataCountHourWised = catchAsync(async (req, res, next) => {
+  let user = req.params.googleId;
+
+  const currentDate = moment().startOf("hour"); 
+  const oneDayAgo = moment(currentDate).subtract(1, "days");
+
+  let searchDataList = await searchData.aggregate([
+    {
+      $match: {
+        googleId: user,
+        date: { $gte: oneDayAgo.toDate() }
+      },
+    },
+    {
+      $group: {
+        _id: { $dateToString: { format: "%Y-%m-%d %H:00", date: "$date" } },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        hour: "$_id",
+        count: 1,
+        _id: 0
+      }
+    },
+    {
+      $sort: {
+        hour: 1
+      }
+    }
+  ]);
+
+  return res.status(200).send({
+    status: "success",
+    requestAt: req.requestTime,
+    data: searchDataList,
+  });
+});
+
+
+
 module.exports = {
   wikipediaDashboard,
   userWiseSearchData,
   get7DaysSeachHistory,
   get1DaySeachHistory,
   get1HourSeachHistory,
+  Past7DaysDataCountDayWised,
+  Past1DayDataCountHourWised
 };

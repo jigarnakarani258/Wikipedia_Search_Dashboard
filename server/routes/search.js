@@ -4,17 +4,9 @@ const { searchWikipedia } = require("../services/wikipedia");
 const { searchData } = require("../models/searchData");
 const { User } = require("../models/user");
 
-// Middleware to check if the user is authenticated
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).json({ error: 'Unauthorized' });
-}
-
 // Protected search route
-searchRouter.post("/search", async (req, res) => {
-  let { query, googleId } = req.body;
+searchRouter.get("/search", async (req, res) => {
+  let { q: query, googleId } = req.query;
 
   let user = await User.findOne({ googleId: googleId });
   if (!user) {
